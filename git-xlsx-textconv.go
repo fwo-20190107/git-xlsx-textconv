@@ -31,7 +31,7 @@ func main() {
 
 					cels := make([]string, 3)
 					arr := []int{1, 2, 3}
-					for i, _ := range arr {
+					for n, _ := range arr {
 						var s string
 						s = row.Col(0)
 
@@ -40,7 +40,7 @@ func main() {
 						s = strings.Replace(s, "\r", "\\r", -1)
 						s = strings.Replace(s, "\t", "\\t", -1)
 
-						cels[i] = s
+						cels[n] = s
 					}
 					fmt.Printf("[%s] %s\n", sheet.Name, strings.Join(cels, "\t"))
 				}
