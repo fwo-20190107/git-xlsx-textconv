@@ -25,15 +25,16 @@ func main() {
 		}
 		for i := 0; i < xlFile.NumSheets(); i++ {
 			if sheet := xlFile.GetSheet(i); sheet != nil {
-				var r uint16
-				for r = 0; r < sheet.MaxRow; r++ {
-					row := sheet.Row(int(r))
+				for r := 0; r < int(sheet.MaxRow); r++ {
+					row := sheet.Row(r)
+					if row == nil {
+						continue
+					}
 
-					cels := make([]string, 3)
-					arr := []int{1, 2, 3}
-					for n, _ := range arr {
+					cels := make([]string, row.LastCol())
+					for n := row.FirstCol(); n < row.LastCol(); n++ {
 						var s string
-						s = row.Col(0)
+						s = row.Col(n)
 
 						s = strings.Replace(s, "\\", "\\\\", -1)
 						s = strings.Replace(s, "\n", "\\n", -1)
